@@ -1,8 +1,13 @@
 package lk.electfast.thiwanka.foodrunner_myapp;
 
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +18,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import lk.electfast.thiwanka.foodrunner_myapp.Fragments.Gallery;
+import lk.electfast.thiwanka.foodrunner_myapp.Fragments.UserReg;
+
+import static android.view.View.VISIBLE;
+
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        Gallery.OnFragmentInteractionListener,
+        UserReg.OnFragmentInteractionListener {
+
+    private Gallery gallery;
+    private UserReg userReg;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +97,55 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+////            Gallery gallery = (Gallery) fragmentManager.findFragmentById(R.id.fragment_container);
+////            UserReg userReg= (UserReg) fragmentManager.findFragmentById(R.id.fragment_container);
+////
+//            Fragment current = fragmentManager.findFragmentById(R.id.fragment_container);
+//            if (current==null) {
+//
+//            } else if (current.equals(gallery)) {
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.remove(gallery).commit();
+//            } else if (current.equals(userReg)) {
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.remove(userReg).commit();
+//            }
+//
+//            FragmentTransaction fragmentTransaction =
+//                    fragmentManager.beginTransaction();
+//            fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.fragment_container)).commit();
+
+            checkfragmentContainer();
+
         } else if (id == R.id.nav_gallery) {
+            checkfragmentContainer();
+            gallery = Gallery.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, gallery).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_userprof) {
-
+            checkfragmentContainer();
+            userReg = UserReg.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, userReg).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    private void checkfragmentContainer(){
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) != null) {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 }
