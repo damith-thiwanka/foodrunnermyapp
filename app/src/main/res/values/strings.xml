@@ -10,4 +10,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="menuItems">
+        <item>Home</item>
+        <item>Gallery</item>
+        <item>User Registration</item>
+        <item>Profile</item>
+        <item>Item Registration</item>
+    </string-array>
 </resources>

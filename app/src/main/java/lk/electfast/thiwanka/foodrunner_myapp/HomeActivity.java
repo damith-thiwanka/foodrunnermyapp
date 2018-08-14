@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import lk.electfast.thiwanka.foodrunner_myapp.Fragments.Gallery;
 import lk.electfast.thiwanka.foodrunner_myapp.Fragments.UserReg;
@@ -31,6 +38,8 @@ public class HomeActivity extends AppCompatActivity
     private Gallery gallery;
     private UserReg userReg;
     private FragmentManager fragmentManager;
+    private ListView menuItems;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,19 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        menuItems =findViewById(R.id.menuList);
+        //menuItems.setVisibility(View.INVISIBLE);
+        ArrayList<String>  items=new ArrayList<>();
+        items.addAll(Arrays.asList(getResources().getStringArray(R.array.menuItems)));
+
+        adapter=new ArrayAdapter<>(
+                HomeActivity.this,
+                android.R.layout.simple_list_item_1,
+                items
+        );
+
+        menuItems.setAdapter(adapter);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +93,28 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
+        MenuInflater menuInflater =getMenuInflater();
+        menuInflater.inflate(R.menu.search_menu,menu);
+        MenuItem menuItem =menu.findItem(R.id.menuList);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+               // menuItems.setVisibility(View.VISIBLE);
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -97,25 +139,6 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-////            Gallery gallery = (Gallery) fragmentManager.findFragmentById(R.id.fragment_container);
-////            UserReg userReg= (UserReg) fragmentManager.findFragmentById(R.id.fragment_container);
-////
-//            Fragment current = fragmentManager.findFragmentById(R.id.fragment_container);
-//            if (current==null) {
-//
-//            } else if (current.equals(gallery)) {
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.remove(gallery).commit();
-//            } else if (current.equals(userReg)) {
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.remove(userReg).commit();
-//            }
-//
-//            FragmentTransaction fragmentTransaction =
-//                    fragmentManager.beginTransaction();
-//            fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.fragment_container)).commit();
-
             checkfragmentContainer();
 
         } else if (id == R.id.nav_gallery) {
