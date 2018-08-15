@@ -1,11 +1,26 @@
 package lk.electfast.thiwanka.foodrunner_myapp.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class CardItem {
 
+    @SerializedName("views")
     String views;
+    @SerializedName("downloads")
     String downloads;
+    @SerializedName("location")
     Location location;
-    urls urls;
+    @SerializedName("urls")
+    urls_Strings urls;
+
+    public CardItem(String views, String downloads, Location location, urls_Strings urls) {
+        this.views = views;
+        this.downloads = downloads;
+        this.location = location;
+        this.urls = urls;
+    }
 
     public String getViews() {
         return views;
@@ -31,11 +46,11 @@ public class CardItem {
         this.location = location;
     }
 
-    public lk.electfast.thiwanka.foodrunner_myapp.models.urls getUrls() {
+    public urls_Strings getUrls() {
         return urls;
     }
 
-    public void setUrls(lk.electfast.thiwanka.foodrunner_myapp.models.urls urls) {
+    public void setUrls(urls_Strings urls) {
         this.urls = urls;
     }
 }

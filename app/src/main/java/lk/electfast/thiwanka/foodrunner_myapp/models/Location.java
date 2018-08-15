@@ -6,7 +6,12 @@ public class Location {
     @SerializedName("title")
     String title;
 
+    public Location(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
+
         return title;
     }
 

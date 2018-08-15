@@ -14,21 +14,13 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
 
 import butterknife.BindView;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
@@ -132,16 +124,27 @@ public class GalleryFragment extends Fragment {
                 String JsonString = builder.toString();
 
                 System.out.println(JsonString);
-                Gson gson=new Gson();
-                CardItem cardItem =gson.fromJson(JsonString,CardItem.class);
-                System.out.println("GSON :- "+cardItem.getDownloads().toString());
-                urlConnection.disconnect();
+
+                Gson gson = new Gson();
+                CardItem[] Card = gson.fromJson(JsonString, CardItem[].class);
+                System.out.println(gson.toJson(Card));
+
+//                Gson gson=new Gson();
+//                CardItem cardItem =gson.fromJson(JsonString,CardItem.class);
+//                System.out.println("GSON :- "+cardItem.getDownloads().toString());
+
+
+               // System.out.println(convertJsonToObject(bufferedReader));
+
+               // urlConnection.disconnect();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }
+
+
     }
 
 
