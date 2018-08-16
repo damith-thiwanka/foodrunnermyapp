@@ -18,12 +18,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
 import lk.electfast.thiwanka.foodrunner_myapp.models.CardItem;
+import lk.electfast.thiwanka.foodrunner_myapp.models.CardModel;
 
 public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.GallaryItemViewHolder> {
 
 
     private Context mContext;
-    private List<CardItem> cardList;
+   private List<CardItem> cardList;
+    //private List<CardModel> cardList;
+
 
     public class GallaryItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtLocation)
@@ -57,12 +60,13 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull final GallaryItemViewHolder holder, int position) {
         CardItem cardItem = cardList.get(position);
-        holder.Title.setText((CharSequence) cardItem.getLocation());
+        //CardModel cardItem = cardList.get(position);
+        holder.Title.setText(cardItem.getLocation().getTitle());
         holder.Downloads.setText(cardItem.getDownloads());
         holder.Views.setText(cardItem.getViews());
 
         Glide.with(mContext)
-                .load(cardItem.getUrls())
+                .load(cardItem.getUrls().getSmall())
                 .into(holder.Image);
 
 
