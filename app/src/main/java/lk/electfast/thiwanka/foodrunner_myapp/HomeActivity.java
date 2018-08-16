@@ -23,6 +23,7 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.fragments.GalleryFragment;
+import lk.electfast.thiwanka.foodrunner_myapp.fragments.ImageViewFragment;
 import lk.electfast.thiwanka.foodrunner_myapp.fragments.UserRegistrationFragment;
 
 public class HomeActivity extends AppCompatActivity
@@ -149,14 +150,18 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
-    }
 
     private void checkfragmentContainer() {
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) != null) {
             getSupportFragmentManager().popBackStack();
         }
+    }
+
+    
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

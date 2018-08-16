@@ -4,10 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
 
 /**
@@ -19,6 +23,9 @@ import lk.electfast.thiwanka.foodrunner_myapp.R;
  * create an instance of this fragment.
  */
 public class ImageViewFragment extends Fragment {
+
+    @BindView(R.id.img_larg)
+    ImageView imageView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -41,7 +48,9 @@ public class ImageViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_image_view, container, false);
+        View inflate=inflater.inflate(R.layout.fragment_image_view, container, false);
+        ButterKnife.bind(this, inflate);
+        return inflate;
     }
 
     public void onButtonPressed(Uri uri) {

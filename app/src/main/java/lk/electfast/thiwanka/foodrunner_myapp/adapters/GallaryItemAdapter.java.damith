@@ -24,9 +24,9 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
 
 
     private Context mContext;
-    private List<CardItem> cardList;
-    //private List<CardModel> cardList;
-
+    //private List<CardItem> cardList;
+    private List<CardModel> cardList;
+    CustomItemClickListener customItemClickListener;
 
 
     public class GallaryItemViewHolder extends RecyclerView.ViewHolder {
@@ -45,10 +45,10 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
         }
     }
 
-    public GallaryItemAdapter(Context mContext, List<CardItem> cardList) {
+    public GallaryItemAdapter(Context mContext, List<CardModel> cardList, CustomItemClickListener customItemClickListener) {
         this.mContext = mContext;
         this.cardList = cardList;
-
+        this.customItemClickListener = customItemClickListener;
 
     }
 
@@ -58,21 +58,26 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
     public GallaryItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_item, parent, false);
         final GallaryItemViewHolder myViewHolder = new GallaryItemViewHolder(itemview);
-
+        itemview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customItemClickListener.onItemClick(view, cardList.get(myViewHolder.getPosition()).getUrls_m());
+            }
+        });
 
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final GallaryItemViewHolder holder, int position) {
-        CardItem cardItem = cardList.get(position);
-        //CardModel cardItem = cardList.get(position);
-        holder.Title.setText(cardItem.getLocation().getTitle());
+        //CardItem cardItem = cardList.get(position);
+        CardModel cardItem = cardList.get(position);
+        holder.Title.setText(cardItem.getLocation());
         holder.Downloads.setText(cardItem.getDownloads());
         holder.Views.setText(cardItem.getViews());
 
         Glide.with(mContext)
-                .load(cardItem.getUrls().getSmall())
+                .load(cardItem.getUrls())
                 .into(holder.Image);
 
 

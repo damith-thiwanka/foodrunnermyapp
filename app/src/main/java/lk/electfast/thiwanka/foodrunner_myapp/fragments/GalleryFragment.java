@@ -94,7 +94,7 @@ public class GalleryFragment extends Fragment {
         load_data();
         return inflate;
     }
-  
+
     private void initRecyclerView(){
       
         gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems);

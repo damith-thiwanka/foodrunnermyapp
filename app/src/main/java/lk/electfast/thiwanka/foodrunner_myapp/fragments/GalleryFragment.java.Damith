@@ -35,6 +35,7 @@ import javax.net.ssl.HttpsURLConnection;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
+import lk.electfast.thiwanka.foodrunner_myapp.adapters.CustomItemClickListener;
 import lk.electfast.thiwanka.foodrunner_myapp.adapters.GallaryItemAdapter;
 import lk.electfast.thiwanka.foodrunner_myapp.models.CardItem;
 import lk.electfast.thiwanka.foodrunner_myapp.models.CardModel;
@@ -67,6 +68,7 @@ public class GalleryFragment extends Fragment {
 
     }
 
+
     public static GalleryFragment newInstance() {
         GalleryFragment fragment = new GalleryFragment();
         return fragment;
@@ -90,16 +92,14 @@ public class GalleryFragment extends Fragment {
         ButterKnife.bind(this, inflate);
         System.out.println("Damith Thiwanka onCreateView " + cardItems);
 
-        //CardModel cardItem = new CardModel("10", "23", "Sri lanka", "https://images.unsplash.com/photo-1483656166969-b06816dfb1a0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=59fef6f59c193789e7991fb0d77a9e0d","https://images.unsplash.com/photo-1483656166969-b06816dfb1a0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=701f88d219b69ca2a3c366598e40007b");
-
         cardItems = new ArrayList<CardModel>();
 
-        cardItems.add(new CardModel("10", "23", "Sri lanka", "https://images.unsplash.com/photo-1483656166969-b06816dfb1a0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=59fef6f59c193789e7991fb0d77a9e0d","https://images.unsplash.com/photo-1483656166969-b06816dfb1a0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=701f88d219b69ca2a3c366598e40007b"));
-        cardItems.add(new CardModel("20", "100", "India", "https://images.unsplash.com/photo-1507383103958-d65fcc200837?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=b36dae087b94f4c90eee3304cff50e10","https://images.unsplash.com/photo-1507383103958-d65fcc200837?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=6ab55e09a3268504319339f3387d2a8a"));
-        cardItems.add(new CardModel("31", "544", "Canada", "https://images.unsplash.com/photo-1528293274494-c9faa25e357e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=737a4c98fcb445d730abc1c63efd186d","https://images.unsplash.com/photo-1528293274494-c9faa25e357e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=234d3289285d59df3487a86a036c6959"));
+        cardItems.add(new CardModel("10", "23", "Sri lanka", "https://images.unsplash.com/photo-1483656166969-b06816dfb1a0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=59fef6f59c193789e7991fb0d77a9e0d", "https://images.unsplash.com/photo-1483656166969-b06816dfb1a0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=701f88d219b69ca2a3c366598e40007b"));
+        cardItems.add(new CardModel("20", "100", "India", "https://images.unsplash.com/photo-1507383103958-d65fcc200837?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=b36dae087b94f4c90eee3304cff50e10", "https://images.unsplash.com/photo-1507383103958-d65fcc200837?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=6ab55e09a3268504319339f3387d2a8a"));
+        cardItems.add(new CardModel("31", "544", "Canada", "https://images.unsplash.com/photo-1528293274494-c9faa25e357e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=737a4c98fcb445d730abc1c63efd186d", "https://images.unsplash.com/photo-1528293274494-c9faa25e357e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjM0MDEyfQ&s=234d3289285d59df3487a86a036c6959"));
 
-       // cardItemList =new ArrayList<CardItem>();
-       // load_data();
+        // cardItemList =new ArrayList<CardItem>();
+        // load_data();
 
 //        gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItemList);
 //        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -108,8 +108,13 @@ public class GalleryFragment extends Fragment {
 //        gellaryView.setItemAnimator(new DefaultItemAnimator());
 //        gellaryView.setAdapter(gallaryItemAdapter);
 
-       // cardItemList =new ArrayList<CardItem>();
-        gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems);
+        // cardItemList =new ArrayList<CardItem>();
+        gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems, new CustomItemClickListener() {
+            @Override
+            public void onItemClick(View v, String LargeURL) {
+                mListener.onFragmentInteraction(LargeURL);
+            }
+        });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         gellaryView.setLayoutManager(mLayoutManager);
         gellaryView.setAdapter(gallaryItemAdapter);
@@ -119,11 +124,11 @@ public class GalleryFragment extends Fragment {
     }
 
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {
@@ -147,7 +152,7 @@ public class GalleryFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
 
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String url_m);
     }
 
 
@@ -184,7 +189,7 @@ public class GalleryFragment extends Fragment {
                     System.out.println(JsonString);
 
                     Gson gson = new Gson();
-                   // CardItem Card = gson.fromJson(JsonString, CardItem[].class);
+                    // CardItem Card = gson.fromJson(JsonString, CardItem[].class);
                     cardItemList = Arrays.asList(gson.fromJson(JsonString, CardItem[].class));
                     System.out.println(cardItemList.get(1).getDownloads());
                     //cardItems.addAll(Arrays.asList(Card));
