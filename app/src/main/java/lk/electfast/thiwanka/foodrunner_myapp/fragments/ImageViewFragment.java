@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
@@ -30,7 +32,7 @@ public class ImageViewFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public ImageViewFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -49,7 +51,11 @@ public class ImageViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View inflate=inflater.inflate(R.layout.fragment_image_view, container, false);
-        ButterKnife.bind(this, inflate);
+       // ButterKnife.bind(this, inflate);
+//        String strtext = getArguments().getString("largeUrl");
+//        Glide.with(getContext())
+//                .load(strtext)
+//                .into(this.imageView);
         return inflate;
     }
 

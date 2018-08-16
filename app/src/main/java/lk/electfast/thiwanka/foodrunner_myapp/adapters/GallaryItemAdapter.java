@@ -26,6 +26,7 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
     private Context mContext;
     private List<CardItem> cardList;
     //private List<CardModel> cardList;
+    CustomItemClickListener customItemClickListener;
 
 
 
@@ -59,9 +60,10 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
         }
     }
 
-    public GallaryItemAdapter(Context mContext, List<CardItem> cardList) {
+    public GallaryItemAdapter(Context mContext, List<CardItem> cardList,CustomItemClickListener customItemClickListener) {
         this.mContext = mContext;
         this.cardList = cardList;
+        this.customItemClickListener = customItemClickListener;
 
 
     }
@@ -72,7 +74,12 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
     public GallaryItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_item, parent, false);
         final GallaryItemViewHolder myViewHolder = new GallaryItemViewHolder(itemview);
-
+        itemview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customItemClickListener.onItemClick(view, cardList.get(myViewHolder.getPosition()).getUrls().getSmall());
+            }
+        });
 
         return myViewHolder;
     }

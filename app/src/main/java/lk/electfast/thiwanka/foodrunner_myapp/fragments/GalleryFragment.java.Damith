@@ -49,7 +49,7 @@ import lk.electfast.thiwanka.foodrunner_myapp.models.CardModel;
  * Use the {@link GalleryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GalleryFragment extends Fragment {
+public class GalleryFragmentDamith extends Fragment {
     private String TAG = GalleryFragment.class.getSimpleName();
 
 

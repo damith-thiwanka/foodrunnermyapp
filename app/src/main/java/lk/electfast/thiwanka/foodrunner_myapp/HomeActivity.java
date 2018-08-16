@@ -23,7 +23,6 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.fragments.GalleryFragment;
-import lk.electfast.thiwanka.foodrunner_myapp.fragments.ImageViewFragment;
 import lk.electfast.thiwanka.foodrunner_myapp.fragments.UserRegistrationFragment;
 
 public class HomeActivity extends AppCompatActivity
@@ -33,6 +32,8 @@ public class HomeActivity extends AppCompatActivity
 
     private GalleryFragment gallery;
     private UserRegistrationFragment userReg;
+
+
     // private ListView menuItems;
     ArrayAdapter<String> adapter;
 
@@ -143,6 +144,7 @@ public class HomeActivity extends AppCompatActivity
                 userReg = UserRegistrationFragment.newInstance();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, userReg).addToBackStack(null).commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -158,10 +160,29 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(String url_m) {
+
+        System.out.println(url_m);
+        Bundle bundle = new Bundle();
+        bundle.putString("largeUrl", url_m);
+        //UserRegistrationFragment fragobj = new UserRegistrationFragment();
+
+        checkfragmentContainer();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        userReg = UserRegistrationFragment.newInstance();
+        userReg.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, userReg).addToBackStack(null).commit();
+
+
 
     }
 }

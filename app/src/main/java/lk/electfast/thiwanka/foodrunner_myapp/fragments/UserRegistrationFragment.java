@@ -7,7 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
 
 /**
@@ -19,25 +25,45 @@ import lk.electfast.thiwanka.foodrunner_myapp.R;
  * create an instance of this fragment.
  */
 public class UserRegistrationFragment extends Fragment {
+//    @BindView(R.id.url)
+//    TextView textView;
+    @BindView(R.id.img_l)
+    ImageView imageView;
 
     private OnFragmentInteractionListener mListener;
-    public UserRegistrationFragment() {}
+
+    public UserRegistrationFragment() {
+    }
 
     public static UserRegistrationFragment newInstance() {
         UserRegistrationFragment fragment = new UserRegistrationFragment();
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_reg, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_reg, container, false);
+        ButterKnife.bind(this,view);
+        Bundle bundle=getArguments();
+        if(bundle!=null){
+            Glide.with(this.getContext())
+                    .load(bundle.getString("largeUrl"))
+                    .into(imageView);
+        }
+        //textView.setText(bundle.getString("largeUrl"));
+
+
+        return view;
     }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

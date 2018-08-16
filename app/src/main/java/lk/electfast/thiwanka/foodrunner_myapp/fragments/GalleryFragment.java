@@ -35,6 +35,7 @@ import javax.net.ssl.HttpsURLConnection;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lk.electfast.thiwanka.foodrunner_myapp.R;
+import lk.electfast.thiwanka.foodrunner_myapp.adapters.CustomItemClickListener;
 import lk.electfast.thiwanka.foodrunner_myapp.adapters.GallaryItemAdapter;
 import lk.electfast.thiwanka.foodrunner_myapp.models.CardItem;
 import lk.electfast.thiwanka.foodrunner_myapp.models.CardModel;
@@ -97,18 +98,23 @@ public class GalleryFragment extends Fragment {
 
     private void initRecyclerView(){
       
-        gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems);
+        gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems, new CustomItemClickListener() {
+            @Override
+            public void onItemClick(View v, String LargeURL) {
+                mListener.onFragmentInteraction(LargeURL);
+            }
+        });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         gellaryView.setLayoutManager(mLayoutManager);
         gellaryView.setAdapter(gallaryItemAdapter);
         
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {
@@ -132,7 +138,7 @@ public class GalleryFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
 
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String url_m);
     }
 
     public void load_data(){
