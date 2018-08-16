@@ -42,6 +42,20 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        public void setData(CardItem item){
+
+            if(null != item.getLocation())
+                this.Title.setText(item.getLocation().getTitle());
+            if(null != item.getDownloads())
+                this.Downloads.setText(item.getDownloads());
+            if(null != item.getViews())
+                this.Views.setText(item.getViews());
+
+            Glide.with(mContext)
+                    .load(item.getUrls().getSmall())
+                    .into(this.Image);
+        }
     }
 
     public GallaryItemAdapter(Context mContext, List<CardItem> cardList) {
@@ -61,15 +75,7 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
     public void onBindViewHolder(@NonNull final GallaryItemViewHolder holder, int position) {
         CardItem cardItem = cardList.get(position);
         //CardModel cardItem = cardList.get(position);
-        holder.Title.setText(cardItem.getLocation().getTitle());
-        holder.Downloads.setText(cardItem.getDownloads());
-        holder.Views.setText(cardItem.getViews());
-
-        Glide.with(mContext)
-                .load(cardItem.getUrls().getSmall())
-                .into(holder.Image);
-
-
+        holder.setData(cardItem);
     }
 
     @Override
