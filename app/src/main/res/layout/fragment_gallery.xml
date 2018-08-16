@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@android:color/holo_orange_dark"
+    android:background="#ffffff"
     android:foregroundGravity="center"
     tools:context=".fragments.GalleryFragment">
 

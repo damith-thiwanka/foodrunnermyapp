@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity
 
     private GalleryFragment gallery;
     private UserRegistrationFragment userReg;
-   // private ListView menuItems;
+    // private ListView menuItems;
     ArrayAdapter<String> adapter;
 
     @BindView(R.id.toolbar)
