@@ -14,7 +14,7 @@
         <item
             android:id="@+id/nav_userprof"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="User Profile" />
+            android:title="LOGIN" />
     </group>
 
 

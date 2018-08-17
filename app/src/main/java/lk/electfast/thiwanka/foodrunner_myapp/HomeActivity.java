@@ -1,6 +1,7 @@
 package lk.electfast.thiwanka.foodrunner_myapp;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -140,10 +141,13 @@ public class HomeActivity extends AppCompatActivity
                         .replace(R.id.fragment_container, gallery).addToBackStack(null).commit();
                 break;
             case R.id.nav_userprof:
-                checkfragmentContainer();
-                userReg = UserRegistrationFragment.newInstance();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, userReg).addToBackStack(null).commit();
+//                checkfragmentContainer();
+//                userReg = UserRegistrationFragment.newInstance();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.fragment_container, userReg).addToBackStack(null).commit();
+                Intent intent = new Intent(HomeActivity.this , LoginActivity.class);
+                startActivity(intent);
+                //finish();
 
         }
 
