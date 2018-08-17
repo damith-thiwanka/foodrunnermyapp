@@ -25,10 +25,7 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
 
     private Context mContext;
     private List<CardItem> cardList;
-    //private List<CardModel> cardList;
     CustomItemClickListener customItemClickListener;
-
-
 
     public class GallaryItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtLocation)
@@ -64,8 +61,6 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
         this.mContext = mContext;
         this.cardList = cardList;
         this.customItemClickListener = customItemClickListener;
-
-
     }
 
 
@@ -80,14 +75,12 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
                 customItemClickListener.onItemClick(view, cardList.get(myViewHolder.getPosition()).getUrls().getSmall());
             }
         });
-
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final GallaryItemViewHolder holder, int position) {
         CardItem cardItem = cardList.get(position);
-        //CardModel cardItem = cardList.get(position);
         holder.setData(cardItem);
     }
 
@@ -96,5 +89,11 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
         return cardList.size();
     }
 
+
+    // Clean all elements of the recycler
+    public void clear() {
+        cardList.clear();
+        notifyDataSetChanged();
+    }
 
 }

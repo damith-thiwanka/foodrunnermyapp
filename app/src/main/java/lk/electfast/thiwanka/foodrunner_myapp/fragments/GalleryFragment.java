@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,16 +56,16 @@ public class GalleryFragment extends Fragment {
 
     @BindView(R.id.galleryRecycleView)
     RecyclerView gellaryView;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout refreshLayout;
 
     private GallaryItemAdapter gallaryItemAdapter;
-    private CardModel cardModel;
     private List<CardItem> cardItems;
 
 
     private OnFragmentInteractionListener mListener;
 
     public GalleryFragment() {
-
     }
 
     public static GalleryFragment newInstance() {
@@ -76,9 +77,6 @@ public class GalleryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "content view is set in onCreate method of activity");
-
-        System.out.println("Damith Thiwanka onCreate "+cardItems);
-
     }
 
     @Nullable
@@ -88,16 +86,21 @@ public class GalleryFragment extends Fragment {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_gallery, container, false);
         ButterKnife.bind(this, inflate);
-        System.out.println("Damith Thiwanka onCreateView "+cardItems);
-       
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                load_data();
+            }
+        });
+
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         cardItems = new ArrayList<CardItem>();
 
-        load_data();
-        return inflate;
-    }
-
-    private void initRecyclerView(){
-      
         gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, String LargeURL) {
@@ -107,14 +110,25 @@ public class GalleryFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         gellaryView.setLayoutManager(mLayoutManager);
         gellaryView.setAdapter(gallaryItemAdapter);
-        
+
+        load_data();
+        return inflate;
     }
 
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+    private void initRecyclerView() {
+
+        gallaryItemAdapter = new GallaryItemAdapter(getContext(), cardItems, new CustomItemClickListener() {
+            @Override
+            public void onItemClick(View v, String LargeURL) {
+                mListener.onFragmentInteraction(LargeURL);
+            }
+        });
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        gellaryView.setLayoutManager(mLayoutManager);
+        gellaryView.setAdapter(gallaryItemAdapter);
+
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -125,8 +139,6 @@ public class GalleryFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        System.out.println("Damith Thiwanka onAttach "+cardItems);
-       // gallaryItemAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -137,20 +149,23 @@ public class GalleryFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-
         void onFragmentInteraction(String url_m);
     }
 
-    public void load_data(){
-         final String SERVER_URL = "https://api.unsplash.com/photos/random?count=10&client_id=6aca39670d4ad87beacfc189ed8255fa89bf2b21ced820f6aa57b317f3fc905f";
+    public void load_data() {
+        final String SERVER_URL = "https://api.unsplash.com/photos/random?count=10&client_id=6aca39670d4ad87beacfc189ed8255fa89bf2b21ced820f6aa57b317f3fc905f";
 
         @SuppressLint("StaticFieldLeak")
-        AsyncTask<Void,Void,Void> task =new AsyncTask<Void, Void, Void>() {
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                gallaryItemAdapter.clear();
+            }
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                //super.onPostExecute(aVoid);
-                initRecyclerView();
+                gallaryItemAdapter.notifyDataSetChanged();
+                refreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -175,6 +190,7 @@ public class GalleryFragment extends Fragment {
                     Gson gson = new Gson();
                     CardItem[] Card = gson.fromJson(JsonString, CardItem[].class);
                     System.out.println(gson.toJson(Card));
+
                     cardItems.addAll(Arrays.asList(Card));
 
                     urlConnection.disconnect();
@@ -189,51 +205,4 @@ public class GalleryFragment extends Fragment {
         task.execute();
     }
 
-
-
-    /**
-     * RecyclerView item decoration - give equal margin around grid item
-     */
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
-    }
-
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
 }
