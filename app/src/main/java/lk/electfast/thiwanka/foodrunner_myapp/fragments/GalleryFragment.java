@@ -98,16 +98,7 @@ public class GalleryFragment extends Fragment {
             }
         });
 
-        ratingBar.setNumStars(5);
-        ratingBar.setIsIndicator(true);
-        ratingBar.setMax(5);
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-               Toast.makeText(getContext(), "value is : " +v,Toast.LENGTH_SHORT);
 
-            }
-        });
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
