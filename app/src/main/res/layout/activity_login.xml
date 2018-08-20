@@ -40,8 +40,9 @@
         android:layout_marginTop="194dp"
         android:background="@drawable/edit_text_background"
         android:drawableLeft="@drawable/round_perm_identity"
-        android:drawablePadding="5dp"
+        android:drawablePadding="10dp"
         android:ems="10"
+        android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:padding="5dp" />
 
@@ -53,9 +54,10 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/edit_text_background"
         android:drawableLeft="@drawable/round_http"
-        android:drawablePadding="5dp"
+        android:drawablePadding="10dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:padding="5dp" />
 
     <TextView
