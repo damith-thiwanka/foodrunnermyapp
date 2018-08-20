@@ -19,6 +19,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -58,6 +60,8 @@ public class GalleryFragment extends Fragment {
     RecyclerView gellaryView;
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.RatingBar)
+    RatingBar ratingBar;
 
     private GallaryItemAdapter gallaryItemAdapter;
     private List<CardItem> cardItems;
@@ -94,6 +98,16 @@ public class GalleryFragment extends Fragment {
             }
         });
 
+        ratingBar.setNumStars(5);
+        ratingBar.setIsIndicator(true);
+        ratingBar.setMax(5);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+               Toast.makeText(getContext(), "value is : " +v,Toast.LENGTH_SHORT);
+
+            }
+        });
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
