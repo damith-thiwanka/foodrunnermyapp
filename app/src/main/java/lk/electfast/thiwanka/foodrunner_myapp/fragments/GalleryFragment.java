@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -112,6 +113,12 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FilterLayout.setVisibility(View.INVISIBLE);
+            }
+        });
+        FilterLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
             }
         });
         refreshLayout.setRefreshing(true);
