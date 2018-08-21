@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_songs"
+        android:icon="@drawable/baseline_spa_black_36"
+        android:title="Songs"/>
+
+    <item
+        android:id="@+id/navigation_albums"
+        android:icon="@drawable/baseline_directions_run_black_36"
+        android:title="Albums"/>
+
+    <item
+        android:id="@+id/navigation_artists"
+        android:icon="@drawable/baseline_beach_access_black_36"
+        android:title="Artists"/>
+
+</menu>
