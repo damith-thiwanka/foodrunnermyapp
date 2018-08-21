@@ -40,7 +40,7 @@ public class TextThumbSeekBar extends android.support.v7.widget.AppCompatSeekBar
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        String progressText = String.valueOf(getProgress());
+        String progressText = " "+String.valueOf(getProgress()+" KM ");
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(progressText, 0, progressText.length(), bounds);
 

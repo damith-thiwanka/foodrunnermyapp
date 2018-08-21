@@ -25,8 +25,8 @@
         <item name="android:progressDrawable">@drawable/rate_bar_custom</item>
         <item name="colorControlActivated">#ef4040</item>
         <item name="colorControlNormal">#cc939393</item>
-        <item name="android:minHeight">23dip</item>
-        <item name="android:maxHeight">150dip</item>
+        <item name="android:scaleX">0.5</item>
+        <item name="android:scaleY">0.5</item>
     </style>
 
 </resources>

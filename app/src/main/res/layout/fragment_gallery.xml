@@ -60,7 +60,7 @@
         android:layout_height="match_parent"
         android:background="#ab1d1d1d"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,11 +113,12 @@
                 android:textColor="@android:color/darker_gray" />
 
             <lk.electfast.thiwanka.foodrunner_myapp.adapters.TextThumbSeekBar
-                android:id="@+id/seekBar3"
+                android:id="@+id/filter_dist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:max="10"
+                android:max="20"
+                android:min="5"
                 android:progress="5"
                 android:thumb="@drawable/shape_seek_bar_text_thumb"
                 android:thumbOffset="4dp" />
@@ -303,7 +304,10 @@
             android:layout_height="wrap_content"
             android:background="@android:color/background_light"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:paddingBottom="20dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp">
 
             <TextView
                 android:id="@+id/textView12"

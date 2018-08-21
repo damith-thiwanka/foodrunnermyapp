@@ -8,6 +8,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +37,10 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
         TextView Views;
         @BindView(R.id.txtDownloads)
         TextView Downloads;
+        @BindView(R.id.txt_rating_view)
+        TextView rating;
+        @BindView(R.id.RatingBar_view)
+        RatingBar ratingBar;
 
         public GallaryItemViewHolder(View itemView) {
             super(itemView);
@@ -54,6 +59,7 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
             Glide.with(mContext)
                     .load(item.getUrls().getSmall())
                     .into(this.Image);
+            rating.setText(String.valueOf(ratingBar.getRating())+"/5.0");
         }
     }
 
@@ -69,7 +75,8 @@ public class GallaryItemAdapter extends RecyclerView.Adapter<GallaryItemAdapter.
     public GallaryItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_item, parent, false);
         final GallaryItemViewHolder myViewHolder = new GallaryItemViewHolder(itemview);
-        itemview.setOnClickListener(new View.OnClickListener() {
+
+        myViewHolder.Image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 customItemClickListener.onItemClick(view, cardList.get(myViewHolder.getPosition()).getUrls().getSmall());
