@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-
-    <gradient
-        android:endColor="#a9a9a9"
-        android:gradientRadius="250"
-        android:startColor="#f6ff1919"
-        android:type="linear" />
-
-
-    <size
-        android:width="1dp"
-        android:height="1dp" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/dot_half" android:state_pressed="true" android:state_window_focused="true" />
+    <item android:drawable="@drawable/dot_half" android:state_focused="true" android:state_window_focused="true" />
+    <item android:drawable="@drawable/dot_half" android:state_selected="true" android:state_window_focused="true" />
+    <item android:drawable="@drawable/dot_half"/>
+</selector>

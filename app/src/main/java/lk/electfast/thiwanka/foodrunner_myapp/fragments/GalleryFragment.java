@@ -19,7 +19,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -62,6 +64,15 @@ public class GalleryFragment extends Fragment {
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.RatingBar)
     RatingBar ratingBar;
+    @BindView(R.id.txt_rating)
+    TextView rating;
+    @BindView(R.id.btn_filter)
+    TextView btnFilter;
+    @BindView(R.id.btn_cancel)
+    TextView CancelFilters;
+    @BindView(R.id.FilterLayout)
+    LinearLayout FilterLayout;
+
 
     private GallaryItemAdapter gallaryItemAdapter;
     private List<CardItem> cardItems;
@@ -91,15 +102,42 @@ public class GalleryFragment extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_gallery, container, false);
         ButterKnife.bind(this, inflate);
 
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FilterLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        CancelFilters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FilterLayout.setVisibility(View.INVISIBLE);
+            }
+        });
+        refreshLayout.setRefreshing(true);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 load_data();
+
+            }
+        });
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                System.out.println(ratingBar.getRating());
+                if ((int) ratingBar.getRating() > 4) {
+                    rating.setText("Excellent!!");
+                } else if ((int) ratingBar.getRating() >= 2) {
+                    rating.setText("Good!");
+                } else {
+                    rating.setText("Bad");
+                }
             }
         });
 
-
-        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+        refreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);

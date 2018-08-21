@@ -11,15 +11,65 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/btn_cancel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/btn_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Filters"
+            android:textAlignment="textEnd"
+            android:textColor="#e7ea1c11" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="30dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/galleryRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/FilterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ab1d1d1d"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:background="@android:color/background_light"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/btn_cancel"
@@ -50,7 +100,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:background="@android:color/background_light"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -61,18 +111,22 @@
                 android:text="How far from yau?"
                 android:textColor="@android:color/darker_gray" />
 
-            <SeekBar
+            <lk.electfast.thiwanka.foodrunner_myapp.adapters.TextThumbSeekBar
                 android:id="@+id/seekBar3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:max="10"
+                android:progress="5"
+                android:thumb="@drawable/shape_seek_bar_text_thumb"
+                android:thumbOffset="4dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:background="@android:color/background_light"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -162,7 +216,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:background="@android:color/background_light"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -175,34 +229,40 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
                 android:layout_marginTop="5dp"
-                android:gravity="center"
+                android:foregroundGravity="left|center_vertical"
+                android:gravity="left|center_vertical"
                 android:orientation="horizontal">
 
                 <RatingBar
                     android:id="@+id/RatingBar"
+                    style="@style/RatingBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="-30dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:stepSize="0.5"
-                    android:theme="@style/RatingBar" />
+                    android:foregroundGravity="left|center_vertical"
+                    android:gravity="left|center_vertical"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    android:stepSize="1" />
+
+                <TextView
+                    android:id="@+id/txt_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingLeft="5dp"
+                    android:text="Good!" />
 
             </LinearLayout>
 
         </LinearLayout>
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/galleryRecycleView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
